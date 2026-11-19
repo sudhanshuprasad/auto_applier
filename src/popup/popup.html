@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoApplier</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-brand">
+        <div class="logo-badge">⚡</div>
+        <div class="brand-text">
+          <h1>AutoApplier</h1>
+          <span class="version-tag">Free AI Web GUI</span>
+        </div>
+      </div>
+      <div class="header-status">
+        <span class="status-dot online"></span>
+        <span id="status-badge" class="status-text">Ready</span>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="tabs-nav">
+      <button class="tab-btn active" data-tab="tab-apply">Apply</button>
+      <button class="tab-btn" data-tab="tab-profile">Profile</button>
+      <button class="tab-btn" data-tab="tab-experience">Experience</button>
+      <button class="tab-btn" data-tab="tab-defaults">EEO & QA</button>
+      <button class="tab-btn" data-tab="tab-settings">Config</button>
+    </nav>
+
+    <!-- Tab 1: Apply (Main Action) -->
+    <section id="tab-apply" class="tab-content active">
+      <div class="apply-hero">
+        <div class="detected-job-card">
+          <div class="job-meta-row">
+            <span class="portal-badge" id="detected-portal">Detecting Portal...</span>
+            <span class="model-badge" id="active-model-badge">Gemini Free</span>
+          </div>
+          <h2 id="detected-title" class="job-title">Navigate to a job posting</h2>
+          <p id="detected-company" class="job-company">Greenhouse, Lever, Workday, Ashby, etc.</p>
+        </div>
+
+        <button id="btn-start-apply" class="btn-primary-apply">
+          <span class="btn-icon">🚀</span>
+          <span class="btn-text">One-Click Auto Apply</span>
+        </button>
+
+        <div class="quick-options">
+          <label class="toggle-control">
+            <input type="checkbox" id="quick-auto-submit">
+            <span class="toggle-track"></span>
+            <span class="toggle-label">Auto-Submit after fill (Skip Review)</span>
+          </label>
+        </div>
+
+        <!-- Activity & Progress Log -->
+        <div class="activity-section">
+          <div class="section-heading">
+            <span>Execution Pipeline</span>
+            <span id="progress-percentage" class="progress-percent">0%</span>
+          </div>
+          <div class="progress-bar-container">
+            <div id="progress-bar" class="progress-bar-fill"></div>
+          </div>
+          <ul id="log-list" class="log-list">
+            <li class="log-item info">Ready. Open any job posting and click Auto Apply.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 2: Profile -->
+    <section id="tab-profile" class="tab-content">
+      <form id="form-personal" class="editor-form">
+        <div class="form-group-row">
+          <div class="form-group">
+            <label for="prof-fullName">Full Name</label>
+            <input type="text" id="prof-fullName" placeholder="Jane Doe" required>
+          </div>
+          <div class="form-group">
+            <label for="prof-email">Email Address</label>
+            <input type="email" id="prof-email" placeholder="jane@example.com" required>
+          </div>
+        </div>
+
+        <div class="form-group-row">
+          <div class="form-group">
+            <label for="prof-phone">Phone Number</label>
+            <input type="tel" id="prof-phone" placeholder="+1 (555) 000-0000">
+          </div>
+          <div class="form-group">
+            <label for="prof-location">City, State / Country</label>
+            <input type="text" id="prof-location" placeholder="San Francisco, CA">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="prof-linkedin">LinkedIn URL</label>
+          <input type="url" id="prof-linkedin" placeholder="https://linkedin.com/in/janedoe">
+        </div>
+
+        <div class="form-group-row">
+          <div class="form-group">
+            <label for="prof-github">GitHub URL</label>
+            <input type="url" id="prof-github" placeholder="https://github.com/janedoe">
+          </div>
+          <div class="form-group">
+            <label for="prof-portfolio">Portfolio / Website</label>
+            <input type="url" id="prof-portfolio" placeholder="https://janedoe.dev">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="prof-skills">Core Skills (Comma separated)</label>
+          <textarea id="prof-skills" rows="3" placeholder="JavaScript, TypeScript, React, Python, AWS, Docker..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="prof-education">Education Summary</label>
+          <input type="text" id="prof-education" placeholder="B.S. in Computer Science, UC Berkeley, 2021">
+        </div>
+
+        <button type="button" id="btn-save-profile" class="btn-secondary">Save Personal Info</button>
+      </form>
+    </section>
+
+    <!-- Tab 3: Experience -->
+    <section id="tab-experience" class="tab-content">
+      <div class="experience-header">
+        <p class="section-desc">Add previous positions. The AI tailors these bullets to each job's keywords.</p>
+        <button id="btn-add-experience" class="btn-sm-action">+ Add Role</button>
+      </div>
+
+      <div id="experience-list" class="experience-cards-container">
+        <!-- Injected dynamically -->
+      </div>
+
+      <button type="button" id="btn-save-experience" class="btn-secondary">Save Experience</button>
+    </section>
+
+    <!-- Tab 4: Defaults & EEO -->
+    <section id="tab-defaults" class="tab-content">
+      <form id="form-defaults" class="editor-form">
+        <p class="section-desc">Default answers for common ATS screening and legal disclosures.</p>
+
+        <div class="form-group">
+          <label for="pref-workAuth">Are you authorized to work in this country?</label>
+          <select id="pref-workAuth">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="pref-sponsorship">Will you now or in the future require visa sponsorship?</label>
+          <select id="pref-sponsorship">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+          </select>
+        </div>
+
+        <div class="form-group-row">
+          <div class="form-group">
+            <label for="pref-salary">Desired Salary / Comp</label>
+            <input type="text" id="pref-salary" placeholder="$150,000">
+          </div>
+          <div class="form-group">
+            <label for="pref-notice">Notice Period</label>
+            <input type="text" id="pref-notice" placeholder="2 weeks">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="pref-veteran">Veteran Status</label>
+          <select id="pref-veteran">
+            <option value="I am not a protected veteran">I am not a protected veteran</option>
+            <option value="I identify as one or more of the classifications of protected veteran">I identify as a protected veteran</option>
+            <option value="I decline to self-identify">I decline to self-identify</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="pref-disability">Disability Status</label>
+          <select id="pref-disability">
+            <option value="No, I do not have a disability">No, I do not have a disability</option>
+            <option value="Yes, I have a disability">Yes, I have a disability</option>
+            <option value="I decline to self-identify">I decline to self-identify</option>
+          </select>
+        </div>
+
+        <div class="form-group-row">
+          <div class="form-group">
+            <label for="pref-gender">Gender</label>
+            <select id="pref-gender">
+              <option value="Decline to self-identify">Decline to self-identify</option>
+              <option value="Female">Female</option>
+              <option value="Male">Male</option>
+              <option value="Non-Binary">Non-Binary</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="pref-race">Race / Ethnicity</label>
+            <select id="pref-race">
+              <option value="Decline to self-identify">Decline to self-identify</option>
+              <option value="Asian">Asian</option>
+              <option value="White">White</option>
+              <option value="Black or African American">Black or African American</option>
+              <option value="Hispanic or Latino">Hispanic or Latino</option>
+              <option value="Two or More Races">Two or More Races</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="button" id="btn-save-defaults" class="btn-secondary">Save Disclosure Defaults</button>
+      </form>
+    </section>
+
+    <!-- Tab 5: Settings -->
+    <section id="tab-settings" class="tab-content">
+      <div class="settings-list">
+        <div class="settings-card">
+          <h3>AI Web Interface Engine</h3>
+          <p class="settings-hint">Select which free web interface to automate. Requires you to be logged in to that service in Chrome.</p>
+          <div class="radio-group-cards">
+            <label class="radio-card">
+              <input type="radio" name="set-ai-provider" value="gemini" checked>
+              <div class="radio-card-content">
+                <span class="radio-card-title">Gemini Free (gemini.google.com)</span>
+                <span class="radio-card-desc">Automates prompt injection and DOM extraction via Google Gemini web interface.</span>
+              </div>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="set-ai-provider" value="chatgpt">
+              <div class="radio-card-content">
+                <span class="radio-card-title">ChatGPT Free (chatgpt.com)</span>
+                <span class="radio-card-desc">Automates prompt injection and DOM extraction via ChatGPT web interface.</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="settings-card">
+          <h3>Form Submission Behavior</h3>
+          <label class="checkbox-row">
+            <input type="checkbox" id="set-review-mode" checked>
+            <span><strong>Review Mode (Recommended):</strong> Highlights fields with a green outline and asks for a final confirmation click before submitting.</span>
+          </label>
+          <label class="checkbox-row">
+            <input type="checkbox" id="set-close-ai-tab" checked>
+            <span>Close AI tab automatically once response is parsed.</span>
+          </label>
+        </div>
+
+        <button type="button" id="btn-save-settings" class="btn-secondary">Save Configuration</button>
+      </div>
+    </section>
+
+    <!-- Footer Toast / Notification -->
+    <div id="toast-message" class="toast-hidden">Saved successfully!</div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

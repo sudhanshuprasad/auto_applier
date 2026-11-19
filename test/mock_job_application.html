@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Senior Full Stack Engineer - QuantumLeap Dynamics | Greenhouse Application</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --primary: #2563eb;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      margin: 0;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      border: 1px solid var(--border);
+    }
+    .header {
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 24px;
+      margin-bottom: 30px;
+    }
+    .company-name {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--primary);
+      font-weight: 700;
+    }
+    h1.job-title {
+      font-size: 28px;
+      margin: 6px 0 10px 0;
+      color: var(--text);
+    }
+    .job-meta {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    .job-description {
+      margin-bottom: 40px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid var(--border);
+    }
+    .job-description h2 {
+      font-size: 18px;
+      margin-top: 24px;
+    }
+    .job-description ul {
+      padding-left: 20px;
+    }
+    .form-section-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-row {
+      display: flex;
+      gap: 16px;
+    }
+    .form-row .form-group {
+      flex: 1;
+    }
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .required {
+      color: #ef4444;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="url"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 14px;
+      box-sizing: border-box;
+      background: #f8fafc;
+      transition: all 0.2s;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--primary);
+      background: #fff;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+    }
+    .file-dropzone {
+      border: 2px dashed #cbd5e1;
+      padding: 24px;
+      border-radius: 8px;
+      text-align: center;
+      background: #f8fafc;
+      cursor: pointer;
+    }
+    .btn-submit {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 14px 28px;
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+      transition: all 0.2s;
+      width: 100%;
+      margin-top: 20px;
+    }
+    .btn-submit:hover {
+      background: #1d4ed8;
+      transform: translateY(-1px);
+    }
+    #submission-status {
+      display: none;
+      margin-top: 24px;
+      padding: 16px;
+      background: #dcfce7;
+      border: 1px solid #86efac;
+      border-radius: 8px;
+      color: #166534;
+      font-weight: 600;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div class="company-name">QuantumLeap Dynamics</div>
+    <h1 class="job-title">Senior Full Stack Engineer (Cloud & AI)</h1>
+    <div class="job-meta">Remote (US) • Full-Time • Engineering Team</div>
+  </div>
+
+  <div class="job-description">
+    <h2>About the Role</h2>
+    <p>
+      QuantumLeap Dynamics is seeking a talented Senior Full Stack Engineer to lead our next-generation distributed web applications.
+      In this role, you will architect resilient backend services in Node.js/Python, build ultra-fast responsive user interfaces in React/TypeScript,
+      and design high-throughput real-time APIs deployed on AWS and Kubernetes.
+    </p>
+
+    <h2>Key Responsibilities</h2>
+    <ul>
+      <li>Architect, build, and maintain production web applications serving millions of active users.</li>
+      <li>Optimize database queries, indexing, and Redis caching layers to keep latency under 50ms.</li>
+      <li>Collaborate across design, product, and machine learning teams to integrate generative AI features.</li>
+      <li>Champion engineering excellence through automated testing, CI/CD pipelines, and mentorship.</li>
+    </ul>
+
+    <h2>Requirements</h2>
+    <ul>
+      <li>4+ years of professional full-stack development experience with TypeScript, React, and Node.js.</li>
+      <li>Strong proficiency in PostgreSQL, Redis, Docker, and AWS cloud environments.</li>
+      <li>Proven track record optimizing complex API performance and reducing client-side render times.</li>
+      <li>Excellent communication skills and ability to solve ambiguous technical challenges.</li>
+    </ul>
+  </div>
+
+  <form id="application-form">
+    <div class="form-section-title">Submit Your Application</div>
+
+    <!-- Resume Upload -->
+    <div class="form-group">
+      <label for="resume-input">Resume / CV <span class="required">*</span></label>
+      <div class="file-dropzone">
+        <input type="file" id="resume-input" name="resume" accept=".pdf,.doc,.docx" required>
+        <p style="margin:8px 0 0;font-size:12px;color:#64748b;">Attach .docx or .pdf (Max 10MB)</p>
+      </div>
+    </div>
+
+    <!-- Personal Info -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="first_name">First Name <span class="required">*</span></label>
+        <input type="text" id="first_name" name="first_name" required>
+      </div>
+      <div class="form-group">
+        <label for="last_name">Last Name <span class="required">*</span></label>
+        <input type="text" id="last_name" name="last_name" required>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="email">Email <span class="required">*</span></label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone <span class="required">*</span></label>
+        <input type="tel" id="phone" name="phone" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="location">Location (City, State) <span class="required">*</span></label>
+      <input type="text" id="location" name="location" required>
+    </div>
+
+    <!-- Social / Links -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="linkedin">LinkedIn Profile URL</label>
+        <input type="url" id="linkedin" name="linkedin">
+      </div>
+      <div class="form-group">
+        <label for="github">GitHub Profile URL</label>
+        <input type="url" id="github" name="github">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="website">Portfolio / Personal Website</label>
+      <input type="url" id="website" name="website">
+    </div>
+
+    <!-- Custom Screening Questions -->
+    <div class="form-section-title" style="margin-top:30px;">Screening Questions</div>
+
+    <div class="form-group">
+      <label for="why_quantumleap">Why do you want to join QuantumLeap Dynamics? <span class="required">*</span></label>
+      <textarea id="why_quantumleap" name="why_quantumleap" rows="4" required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="latency_challenge">Describe a time you solved a complex latency or scaling bottleneck. <span class="required">*</span></label>
+      <textarea id="latency_challenge" name="latency_challenge" rows="4" required></textarea>
+    </div>
+
+    <!-- Disclosures & Legal -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="work_auth">Are you legally authorized to work in the United States? <span class="required">*</span></label>
+        <select id="work_auth" name="work_auth" required>
+          <option value="">-- Please Select --</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="sponsorship">Will you now or in the future require visa sponsorship? <span class="required">*</span></label>
+        <select id="sponsorship" name="sponsorship" required>
+          <option value="">-- Please Select --</option>
+          <option value="No">No</option>
+          <option value="Yes">Yes</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="desired_salary">Desired Compensation / Salary ($)</label>
+        <input type="text" id="desired_salary" name="desired_salary">
+      </div>
+      <div class="form-group">
+        <label for="notice_period">Notice Period</label>
+        <input type="text" id="notice_period" name="notice_period">
+      </div>
+    </div>
+
+    <button type="submit" id="submit_app" class="btn-submit">Submit Application</button>
+  </form>
+
+  <div id="submission-status">
+    🎉 Application Received! All fields verified and resume received.
+  </div>
+</div>
+
+<script>
+  document.getElementById('application-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    console.log('Form submission intercepted successfully!');
+    const status = document.getElementById('submission-status');
+    status.style.display = 'block';
+    status.scrollIntoView({ behavior: 'smooth' });
+  });
+</script>
+
+</body>
+</html>
